@@ -1,11 +1,176 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>evil-corp</title>
+<link rel="icon" href="papka/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Запривачено</title>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Unbounded', sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      background: linear-gradient(to right, #000, #333);
+      transition: background 1s ease;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    .info, .quote {
+      font-size: 1.2em;
+      margin: 10px 0;
+      padding: 0 10px;
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 40px;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      text-decoration: none;
+      border-radius: 14px;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(5px);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      font-size: 1.1em;
+    }
+
+    .social-link:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .material-icons {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .button-row {
+        flex-direction: column;
+        align-items: center;
+      }
+      h1 {
+        font-size: 2em;
+      }
+    }
+  </style>
 </head>
 <body>
-    <img src="animation.gif" alt="evil-corp - корпорация зла" style="display: block; margin: auto;">
+  <h1>Запривачено</h1>
+  <div class="info" id="ip-info">Загрузка IP...</div>
+  <div class="quote" id="bible-quote">Загрузка цитаты...</div>
+
+  <!-- Кнопки в стиле MineKeK -->
+  <div class="button-row">
+    <a class="social-link" href="https://shop.evil-corp.ru" target="_blank">
+      <span class="material-icons">shopping_cart</span>
+    </a>
+    <a class="social-link" href="https://rep.evil-corp.ru" target="_blank">
+      <span class="material-icons">report_problem</span>
+    </a>
+    <a class="social-link" href="zueelan.ru" target="_blank">
+      <span class="material-icons">add</span>
+    </a>
+  </div>
+
+  <script>
+    function randomGradient() {
+      const getColor = () => `hsl(${Math.floor(Math.random() * 360)}, 70%, 50%)`;
+      const color1 = getColor();
+      const color2 = getColor();
+      document.body.style.background = `linear-gradient(to right, ${color1}, ${color2})`;
+    }
+    randomGradient();
+
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('ip-info').textContent = `Ваш IP: ${data.ip} (${data.country_name})`;
+      })
+      .catch(() => {
+        document.getElementById('ip-info').textContent = 'Не удалось загрузить IP';
+      });
+
+    const quotes = [
+      "«В начале сотворил Бог небо и землю». — Бытие 1:1",
+      "«И сказал Бог: да будет свет. И стал свет». — Бытие 1:3",
+      "«Не убивай». — Исход 20:13",
+      "«Я Господь, Бог твой; да не будет у тебя других богов перед лицом Моим». — Исход 20:2-3",
+      "«Чти отца твоего и мать твою». — Исход 20:12",
+      "«Господь — Пастырь мой; я ни в чём не буду нуждаться». — Псалом 22:1",
+      "«Пусть будут слова уст моих и помышления сердца моего угодны Тебе». — Псалом 18:15",
+      "«Сердце чистое сотвори во мне, Боже». — Псалом 50:12",
+      "«Храни сердце твое больше всего, что хранишь». — Притчи 4:23",
+      "«Начало мудрости — страх Господень». — Притчи 9:10",
+      "«Надейся на Господа всем сердцем твоим». — Притчи 3:5",
+      "«От Господа направляются шаги человека». — Притчи 20:24",
+      "«Ищите Господа, когда можно найти Его». — Исаия 55:6",
+      "«Он даст утомленному силу». — Исаия 40:29",
+      "«Не бойся, ибо Я с тобою». — Исаия 41:10",
+      "«Я Господь, и нет иного». — Исаия 45:5",
+      "«Придите ко Мне, все труждающиеся и обремененные». — Матфея 11:28",
+      "«Блаженны нищие духом». — Матфея 5:3",
+      "«Блаженны чистые сердцем, ибо они Бога узрят». — Матфея 5:8",
+      "«Вы — свет мира». — Матфея 5:14",
+      "«Не заботьтесь о завтрашнем дне». — Матфея 6:34",
+      "«Просите, и дано будет вам». — Матфея 7:7",
+      "«Возлюби ближнего твоего, как самого себя». — Матфея 22:39",
+      "«Сие есть тело Мое, за вас ломимое». — Луки 22:19",
+      "«Отче! прости им, ибо не знают, что делают». — Луки 23:34",
+      "«Я есмь путь и истина и жизнь». — Иоанна 14:6",
+      "«Да не смущается сердце ваше». — Иоанна 14:1",
+      "«Все могу в укрепляющем меня Христе». — Филиппийцам 4:13",
+      "«Любовь долго терпит, милосердствует». — 1 Коринфянам 13:4",
+      "«Теперь же пребывают вера, надежда, любовь». — 1 Коринфянам 13:13",
+      "«Если Бог за нас, кто против нас?». — Римлянам 8:31",
+      "«Не сообразуйтесь с веком сим». — Римлянам 12:2",
+      "«Возмездие за грех — смерть». — Римлянам 6:23",
+      "«Ибо так возлюбил Бог мир». — Иоанна 3:16",
+      "«Дух бодр, плоть же немощна». — Матфея 26:41",
+      "«Верующий в Сына имеет жизнь вечную». — Иоанна 3:36",
+      "«Не судите, да не судимы будете». — Матфея 7:1",
+      "«Примиритесь с Богом». — 2 Коринфянам 5:20",
+      "«Где Дух Господень, там свобода». — 2 Коринфянам 3:17",
+      "«Смиритесь под крепкую руку Божию». — 1 Петра 5:6",
+      "«Бог гордым противится, а смиренным даёт благодать». — Иакова 4:6",
+      "«Будьте же исполнители слова». — Иакова 1:22",
+      "«Блажен человек, который переносит искушение». — Иакова 1:12",
+      "«Молитва веры исцелит болящего». — Иакова 5:15",
+      "«Вера без дел мертва». — Иакова 2:26",
+      "«Господь близко ко всем призывающим Его». — Псалом 144:18",
+      "«Бог есть любовь». — 1 Иоанна 4:8",
+      "«В любви нет страха». — 1 Иоанна 4:18",
+      "«Христос воскрес из мёртвых». — 1 Коринфянам 15:20",
+      "«Потому что я знаю: Искупитель мой жив». — Иов 19:25"
+    ];
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    document.getElementById('bible-quote').textContent = randomQuote;
+  </script>
 </body>
 </html>
