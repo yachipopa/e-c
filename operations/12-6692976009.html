@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Уведомление об оплате</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    .container {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 25px;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+
+    .card p {
+      margin: 0 0 15px 0;
+      color: #333;
+    }
+
+    .order-id {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .amount {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .label {
+      font-size: 14px;
+      color: #999;
+    }
+
+    .divider {
+      border-top: 1px dashed #ddd;
+      margin: 25px 0;
+    }
+
+    .support-text {
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .support-text a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 15px;
+      }
+
+      .order-id {
+        font-size: 18px;
+      }
+
+      .amount {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://zueelan.ru/sber.png" alt="СБЕР БАНК" style="height: 30px; margin-bottom: 15px;" />
+
+    <div class="card">
+      <p style="font-size: 18px; font-weight: bold;">Уведомление об оплате заказа</p>
+      <p class="order-id">12-6692976009</p>
+
+      <p class="label">PK_KINOTEATR SP PUSHK</p>
+      <p class="amount">200.00</p>
+      <p class="label">RUB</p>
+
+      <div class="divider"></div>
+
+      <p>Оплата успешно проведена</p>
+      <p>06.04.2025 20:25:18 по карте</p>
+      <p>2200 **** **** 1111</p>
+
+      <p class="support-text">
+        Если вы не совершали эту операцию, пожалуйста, свяжитесь с нами по адресу
+        <a href="mailto:support@zueelan.ru">support@zueelan.ru</a>
+        для отмены платежа.
+      </p>
+    </div>
+
+    <img src="https://zueelan.ru/Mincif.png" alt="Минцифры" style="margin-top: 15px; border-radius: 8px;" />
+  </div>
+</body>
+</html>
