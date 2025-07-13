@@ -1,2 +1,3 @@
 User-agent: *
 Disallow: /papka
+Disallow: /operations
