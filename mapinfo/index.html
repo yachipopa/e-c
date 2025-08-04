@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Трекинг игроков Minecraft</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f8f8f8;
+    }
+    h1 {
+      text-align: center;
+    }
+    .player {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .foreign {
+      color: #e74c3c;
+    }
+    .coords {
+      color: #555;
+      font-family: monospace;
+    }
+    .error {
+      color: red;
+      text-align: center;
+    }
+    .loading {
+      text-align: center;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+  <h1>Игроки на сервере</h1>
+  <div id="players" class="loading">Загрузка...</div>
+
+  <script>
+    const DATA_URL = 'http://maps.mkek.fun:25733/maps/world/live/players.json';
+
+    async function loadPlayers() {
+      try {
+        const res = await fetch(DATA_URL);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+
+        const players = data.players || [];
+        const container = document.getElementById('players');
+        container.innerHTML = '';
+
+        if (players.length === 0) {
+          container.innerHTML = '<div class="loading">Нет игроков на сервере</div>';
+          return;
+        }
+
+        players.sort((a, b) => a.name.localeCompare(b.name));
+
+        players.forEach(p => {
+          const playerDiv = document.createElement('div');
+          playerDiv.className = 'player';
+
+          const nameHTML = `<strong class="${p.foreign ? 'foreign' : ''}">${p.name}${p.foreign ? ' (иностранец)' : ''}</strong>`;
+          const coords = p.position;
+          const coordsHTML = `<div class="coords">X: ${coords.x.toFixed(1)}, Y: ${coords.y.toFixed(1)}, Z: ${coords.z.toFixed(1)}</div>`;
+
+          playerDiv.innerHTML = nameHTML + coordsHTML;
+          container.appendChild(playerDiv);
+        });
+      } catch (err) {
+        document.getElementById('players').innerHTML = `<div class="error">Ошибка загрузки данных: ${err.message}</div>`;
+      }
+    }
+
+    loadPlayers();
+    setInterval(loadPlayers, 3000); // обновление каждые 3 секунды
+  </script>
+</body>
+</html>
